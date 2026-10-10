@@ -1,0 +1,19 @@
+id: S08_dns_failure
+group: network
+description: "Hostname does not exist (NXDOMAIN)"
+faults:
+  dns_error: "NXDOMAIN"
+request:
+  method: GET
+  url: "https://nonexistent-domain-layers-xyz.org/api"
+  headers: {}
+response:
+  status: null
+  error_class: "ConnectError"
+  headers: {}
+  body: null
+expected:
+  layer: network
+  cause: dns_failure
+  completion: NOT_APPLICABLE
+  action: retry_with_backoff

@@ -1,0 +1,19 @@
+id: S10_tls_expired
+group: network
+description: "Server SSL certificate expired"
+faults:
+  ssl_error: "certificate_expired"
+request:
+  method: GET
+  url: "https://expired.badssl.com/"
+  headers: {}
+response:
+  status: null
+  error_class: "SSLError"
+  headers: {}
+  body: null
+expected:
+  layer: network
+  cause: tls_expired
+  completion: NOT_APPLICABLE
+  action: retry_with_backoff

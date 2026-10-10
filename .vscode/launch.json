@@ -1,0 +1,106 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "layers diagnose (stdin)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "layers.cli",
+      "args": ["diagnose", "-"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "layers diagnose (current file)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "layers.cli",
+      "args": ["diagnose", "${file}", "--provider", "serpapi"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "layers diagnose --json (current file)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "layers.cli",
+      "args": ["diagnose", "${file}", "--provider", "serpapi", "--json"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "layers probe dns (serpapi.com)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "layers.cli",
+      "args": ["probe", "dns", "https://serpapi.com"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "layers probe tls (serpapi.com)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "layers.cli",
+      "args": ["probe", "tls", "https://serpapi.com"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "layers packs list",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "layers.cli",
+      "args": ["packs", "list"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "layers packs show serpapi",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "layers.cli",
+      "args": ["packs", "show", "serpapi"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "pytest (all tests)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["tests/", "-v"],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "pytest (current test file)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["${file}", "-v"],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "SerpApi integration example",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/examples/serpapi_integration.py",
+      "console": "integratedTerminal",
+      "env": {
+        "SERPAPI_KEY": "your_api_key_here"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "HAR diagnosis example",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/examples/har_diagnosis.py",
+      "args": ["tests/fixtures/sample.har"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

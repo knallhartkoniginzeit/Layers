@@ -1,0 +1,19 @@
+id: S18_provider_incident_open
+group: provider
+description: "Provider returned 503 while status page confirms active ongoing incident"
+faults:
+  status_incident: "Major Outage on Search API"
+request:
+  method: GET
+  url: "https://status.openai.com/api/v2/summary.json"
+  headers: {}
+response:
+  status: 503
+  headers:
+    Content-Type: "application/json"
+  body: '{"status": {"indicator": "major", "description": "Major Service Outage"}, "incidents": [{"name": "API Outage", "status": "investigating"}]}'
+expected:
+  layer: provider
+  cause: provider_incident
+  completion: NOT_APPLICABLE
+  action: wait

@@ -1,0 +1,23 @@
+id: S17_provider_500_internal_error
+group: provider
+description: "Provider internal error 500 with provider request-id header"
+faults:
+  server_error: true
+request:
+  method: POST
+  url: "https://api.example.com/v1/compute"
+  headers:
+    Content-Type: "application/json"
+    Idempotency-Key: "idem_key_123"
+  body: '{"task": "calculate"}'
+response:
+  status: 500
+  headers:
+    Content-Type: "application/json"
+    X-Request-Id: "req_server_err_123"
+  body: '{"error": "InternalServerError", "message": "Unhandled worker crash"}'
+expected:
+  layer: provider
+  cause: provider_error
+  completion: NOT_COMPLETED
+  action: retry_with_backoff

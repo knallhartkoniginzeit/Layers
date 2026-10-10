@@ -1,0 +1,22 @@
+id: S15_gateway_429_with_retry_after
+group: gateway
+description: "Edge CDN rate limit 429 with HTML body and Retry-After header"
+faults:
+  cdn_rate_limit: true
+request:
+  method: GET
+  url: "https://api.openai.com/v1/models"
+  headers: {}
+response:
+  status: 429
+  headers:
+    Server: "cloudflare"
+    CF-Ray: "8294a2b1c8f0-DFW"
+    Retry-After: "60"
+    Content-Type: "text/html"
+  body: "<html><body>Error 429 - Cloudflare Rate Limit</body></html>"
+expected:
+  layer: gateway
+  cause: gateway_rate_limit
+  completion: NOT_APPLICABLE
+  action: retry_with_backoff

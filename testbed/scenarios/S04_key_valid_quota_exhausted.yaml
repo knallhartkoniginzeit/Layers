@@ -1,0 +1,20 @@
+id: S04_key_valid_quota_exhausted
+group: credentials
+description: "Key is valid but searches left is 0"
+faults:
+  total_searches_left: 0
+request:
+  method: GET
+  url: "https://serpapi.com/search?q=coffee"
+  headers:
+    X-SerpApi-Key: "[REDACTED]"
+response:
+  status: 429
+  headers:
+    Content-Type: "application/json"
+  body: '{"error": "Your account has run out of searches."}'
+expected:
+  layer: credentials
+  cause: serpapi_quota_exhausted
+  completion: NOT_APPLICABLE
+  action: fix_credentials

@@ -1,0 +1,21 @@
+id: S07_missing_required_field
+group: request
+description: "Missing required schema parameter rejected with 422 Unprocessable Entity"
+faults:
+  request_lint_error: "validation_error"
+request:
+  method: POST
+  url: "https://api.example.com/v1/orders"
+  headers:
+    Content-Type: "application/json"
+  body: '{"extra": "value"}'
+response:
+  status: 422
+  headers:
+    Content-Type: "application/json"
+  body: '{"detail": [{"loc": ["body", "item_id"], "msg": "Field required", "type": "missing"}]}'
+expected:
+  layer: request
+  cause: malformed_request
+  completion: NOT_COMPLETED
+  action: fix_request

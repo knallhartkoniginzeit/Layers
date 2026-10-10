@@ -1,0 +1,14 @@
+name: openai_compat
+description: "OpenAI and OpenAI-compatible API provider pack (v1/chat/completions, v1/models, embeddings)"
+hosts:
+  - "api.openai.com"
+  - "api.groq.com"
+  - "api.together.xyz"
+  - "openrouter.ai"
+status_url: "https://status.openai.com/api/v2/summary.json"
+error_codes:
+  401: "Incorrect API key or Bearer token missing"
+  403: "Country, region, or territory not supported, or project permission denied"
+  429: "Rate limit reached (TPM/RPM) or quota credit balance exceeded"
+  500: "OpenAI server error while processing prompt or generating tokens"
+  503: "Model engine overloaded or temporary engine maintenance"

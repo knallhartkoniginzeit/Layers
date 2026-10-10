@@ -1,0 +1,23 @@
+id: S03_missing_scope_read_ok_write_403
+group: credentials
+description: "Key valid for read GET but returned 403 Forbidden on write POST"
+faults:
+  read_status: 200
+  write_status: 403
+request:
+  method: POST
+  url: "https://api.example.com/v1/orders"
+  headers:
+    Authorization: "Bearer [REDACTED]"
+    Content-Type: "application/json"
+  body: '{"item": "book", "qty": 1}'
+response:
+  status: 403
+  headers:
+    Content-Type: "application/json"
+  body: '{"error": "Forbidden: write scope required"}'
+expected:
+  layer: credentials
+  cause: missing_permission
+  completion: NOT_COMPLETED
+  action: fix_credentials

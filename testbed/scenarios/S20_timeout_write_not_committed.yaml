@@ -1,0 +1,24 @@
+id: S20_timeout_write_not_committed
+group: completion
+description: "Non-idempotent write timed out at proxy and order was never written (unknown / check-first)"
+faults:
+  toy_api_commits_write: false
+  gateway_timeout: true
+request:
+  method: POST
+  url: "https://api.example.com/orders"
+  headers:
+    Content-Type: "application/json"
+  body: '{"sku": "monitor-4k", "amount": 400}'
+response:
+  status: 504
+  elapsed_ms: 30000
+  headers:
+    Server: "nginx/1.24"
+    Content-Type: "text/html"
+  body: "<html><body>504 Gateway Timeout</body></html>"
+expected:
+  layer: gateway
+  cause: gateway_timeout
+  completion: UNKNOWN
+  action: check_then_retry

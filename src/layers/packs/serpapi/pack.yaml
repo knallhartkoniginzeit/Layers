@@ -1,0 +1,14 @@
+name: serpapi
+description: "SerpApi provider pack for Google, Bing, Baidu, and multi-engine search APIs"
+hosts:
+  - "serpapi.com"
+  - "www.serpapi.com"
+status_url: "https://serpapi.com/status"
+account_url: "https://serpapi.com/account"
+archive_url: "https://serpapi.com/searches"
+error_codes:
+  400: "Invalid query syntax, unsupported engine, or missing required search parameters (e.g., q, engine)"
+  401: "Invalid or inactive API key. Check key at serpapi.com/manage-api-key"
+  429: "Account search quota exceeded or concurrent search limit reached"
+  500: "Internal SerpApi search failure while scraping or rendering upstream results"
+  503: "Target search engine upstream unavailable or under maintenance"

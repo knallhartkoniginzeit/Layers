@@ -1,0 +1,19 @@
+id: S09_connection_refused
+group: network
+description: "Target IP reachable but port closed (Connection Refused)"
+faults:
+  tcp_error: "ConnectionRefused"
+request:
+  method: GET
+  url: "http://127.0.0.1:59999/api"
+  headers: {}
+response:
+  status: null
+  error_class: "ConnectError"
+  headers: {}
+  body: null
+expected:
+  layer: network
+  cause: connection_refused
+  completion: NOT_APPLICABLE
+  action: retry_with_backoff

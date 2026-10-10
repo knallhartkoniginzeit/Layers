@@ -1,0 +1,22 @@
+id: S13_html_502_nginx
+group: gateway
+description: "Immediate 502 Bad Gateway with HTML error page from nginx"
+faults:
+  nginx_error: "upstream_down"
+request:
+  method: GET
+  url: "https://api.example.com/v1/items"
+  headers:
+    Accept: "application/json"
+response:
+  status: 502
+  elapsed_ms: 120
+  headers:
+    Server: "nginx/1.24.0"
+    Content-Type: "text/html"
+  body: "<html><head><title>502 Bad Gateway</title></head><body><center><h1>502 Bad Gateway</h1></center></body></html>"
+expected:
+  layer: gateway
+  cause: gateway_error_page
+  completion: NOT_APPLICABLE
+  action: retry_with_backoff

@@ -1,0 +1,23 @@
+id: S14_proxy_timeout_fixed_duration
+group: gateway
+description: "Failure elapsed time clusters exactly at 30.0s fixed load-balancer cutoff"
+faults:
+  lb_timeout: 30000
+request:
+  method: POST
+  url: "https://api.example.com/v1/heavy-job"
+  headers:
+    Content-Type: "application/json"
+  body: '{"task": "process"}'
+response:
+  status: 504
+  elapsed_ms: 30040
+  headers:
+    Server: "cloudflare"
+    Content-Type: "text/html"
+  body: "<html><head><title>504 Gateway Time-out</title></head></html>"
+expected:
+  layer: gateway
+  cause: gateway_timeout
+  completion: UNKNOWN
+  action: check_then_retry

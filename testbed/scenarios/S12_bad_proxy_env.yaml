@@ -1,0 +1,20 @@
+id: S12_bad_proxy_env
+group: network
+description: "HTTPS_PROXY environment variable pointing to non-existent proxy host"
+faults:
+  env:
+    HTTPS_PROXY: "http://127.0.0.1:9999"
+request:
+  method: GET
+  url: "https://api.example.com/v1/ping"
+  headers: {}
+response:
+  status: null
+  error_class: "ProxyError"
+  headers: {}
+  body: null
+expected:
+  layer: network
+  cause: bad_proxy_env
+  completion: NOT_APPLICABLE
+  action: retry_with_backoff

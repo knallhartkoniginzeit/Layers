@@ -1,0 +1,21 @@
+id: S05_malformed_json
+group: request
+description: "Content-Type is application/json but body has broken trailing comma or unclosed brace"
+faults:
+  request_lint_error: "invalid_json"
+request:
+  method: POST
+  url: "https://api.example.com/v1/items"
+  headers:
+    Content-Type: "application/json"
+  body: '{"name": "test", "quantity": }'
+response:
+  status: 400
+  headers:
+    Content-Type: "application/json"
+  body: '{"error": "Failed to decode JSON object"}'
+expected:
+  layer: request
+  cause: malformed_request
+  completion: NOT_COMPLETED
+  action: fix_request

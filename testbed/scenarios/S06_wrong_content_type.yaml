@@ -1,0 +1,21 @@
+id: S06_wrong_content_type
+group: request
+description: "Sent raw JSON with missing or text/plain Content-Type"
+faults:
+  request_lint_error: "wrong_content_type"
+request:
+  method: POST
+  url: "https://api.example.com/v1/items"
+  headers:
+    Content-Type: "text/plain"
+  body: '{"name": "test"}'
+response:
+  status: 415
+  headers:
+    Content-Type: "application/json"
+  body: '{"error": "Unsupported Media Type: expected application/json"}'
+expected:
+  layer: request
+  cause: malformed_request
+  completion: NOT_COMPLETED
+  action: fix_request

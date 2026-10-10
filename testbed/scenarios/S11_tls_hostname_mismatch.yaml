@@ -1,0 +1,19 @@
+id: S11_tls_hostname_mismatch
+group: network
+description: "Server SSL certificate does not match the hostname"
+faults:
+  ssl_error: "hostname_mismatch"
+request:
+  method: GET
+  url: "https://wrong.host.badssl.com/"
+  headers: {}
+response:
+  status: null
+  error_class: "SSLError"
+  headers: {}
+  body: null
+expected:
+  layer: network
+  cause: tls_hostname_mismatch
+  completion: NOT_APPLICABLE
+  action: retry_with_backoff

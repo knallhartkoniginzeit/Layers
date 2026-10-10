@@ -1,0 +1,25 @@
+id: S19_timeout_write_committed
+group: completion
+description: "Non-idempotent write timed out at gateway but backend committed write and returned resource ID"
+faults:
+  toy_api_commits_write: true
+  gateway_timeout: true
+request:
+  method: POST
+  url: "https://api.example.com/orders"
+  headers:
+    Content-Type: "application/json"
+  body: '{"sku": "laptop-99", "amount": 1200}'
+response:
+  status: 504
+  elapsed_ms: 30000
+  headers:
+    Server: "nginx/1.24"
+    Content-Type: "application/json"
+    X-Request-Id: "req_commit_success_991"
+  body: '{"id": "ord_8829104", "status": "created"}'
+expected:
+  layer: gateway
+  cause: gateway_timeout
+  completion: COMPLETED
+  action: do_not_retry
